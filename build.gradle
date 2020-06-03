@@ -22,7 +22,10 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.12.2-1.0'
+def ocVersion = '1.7.+'
+def mcVersion = '1.12.2'
+
+version = "${mcVersion}-1.1"
 group = 'gregicadditions' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Galas_Additions'
 

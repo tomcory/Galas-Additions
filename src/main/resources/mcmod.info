@@ -1,13 +1,13 @@
 [
 {
   "modid": "gtadditions",
-  "name": "Shadows of Greg",
+  "name": "Galas Additions",
   "description": "The big spook takes your lunch money.  Who reads these?",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "1.1",
+  "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Shadows_of_Fire", "TheEmosewaPixel","Bartz24"],
+  "authorList": ["Galadir", "Cyanide23", "Shadows_of_Fire", "TheEmosewaPixel","Bartz24"],
   "credits": "The creators of GTCE, GT5U and most importantly, GregoriusT.",
   "logoFile": "",
   "screenshots": [],
