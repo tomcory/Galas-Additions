@@ -75,10 +75,7 @@ repositories {
         url = "http://maven.ic2.player.to"
     }
     maven {
-        url "http://tehnut.info/maven"
-    }
-    maven {
-        url "https://minecraft.curseforge.com/api/maven"
+        url = "https://minecraft.curseforge.com/api/maven"
     }
     maven {
         url = "http://chickenbones.net/maven/"
@@ -86,7 +83,11 @@ repositories {
     maven {
         url = "https://mod-buildcraft.com/maven/"
     }
-    maven { url = "/localrepo/" }
+
+    maven { url = "./localrepo/" }
+    maven {
+        url = "https://maven.cil.li/"
+    }
 }
 
 dependencies {
@@ -98,7 +99,7 @@ dependencies {
 
     compile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.+"
     compile "mezz.jei:jei_1.12.2:+"
-    compile "mcp.mobius.waila:Hwyla:1.8+"
+    compile "mcp.mobius.waila:Hwyla:1.8+:sources"
     compile "net.sengir.forestry:forestry_1.12.2:+"
     compile "gregtechce:gregtech:1.12.2:1.8.13.465"
     compile "codechicken:ChickenASM:1.12-+"
