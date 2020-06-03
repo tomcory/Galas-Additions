@@ -78,7 +78,7 @@ repositories {
     maven {
         url = "https://mod-buildcraft.com/maven/"
     }
-    maven { url = "../localrepo/" }
+    maven { url = "/localrepo/" }
 }
 
 dependencies {
