@@ -1,3 +1,11 @@
+// Forces correct lwjgl version
+// (net.minecraft:client:1.12.2 tries to load org.lwjgl.lwjgl:lwjgl-platform:2.9.2-nightly-20140822 which does not exist?)
+configurations.all {
+    resolutionStrategy {
+        force 'org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209'
+    }
+}
+
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
