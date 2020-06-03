@@ -89,6 +89,8 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 
 		public RecipeMap<?> getRecipeMaps(String machineName) {
 			switch (machineName) {
+				case "sifter":
+					return RecipeMaps.SIFTER_RECIPES;
 			case "macerator":
 				return RecipeMaps.MACERATOR_RECIPES;
 			case "cluster_mill":

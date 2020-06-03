@@ -29,7 +29,7 @@ public class GTCombItem extends Item implements IColoredItem, IItemModelRegister
 		setHasSubtypes(true);
 		setCreativeTab(Tabs.tabApiculture);
 		setRegistryName(GregicAdditions.MODID, "comb");
-		setTranslationKey(GregicAdditions.MODID + ":comb");
+		//setTranslationKey(GregicAdditions.MODID + ":comb");
 	}
 
 	@Optional.Method(modid = "forestry")
@@ -54,12 +54,12 @@ public class GTCombItem extends Item implements IColoredItem, IItemModelRegister
 		}
 	}
 
-	@Optional.Method(modid = "forestry")
-	@Override
-	public String getTranslationKey(ItemStack stack) {
-		GTCombs honeyComb = GTCombs.get(stack.getItemDamage());
-		return super.getTranslationKey(stack) + "." + honeyComb.name;
-	}
+	//@Optional.Method(modid = "forestry")
+	//@Override
+	//public String getTranslationKey(ItemStack stack) {
+	//	GTCombs honeyComb = GTCombs.get(stack.getItemDamage());
+	//	return super.getTranslationKey(stack) + "." + honeyComb.name;
+	//}
 
 	@Optional.Method(modid = "forestry")
 	@Override
