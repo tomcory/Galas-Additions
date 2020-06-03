@@ -1,6 +1,5 @@
 package gregicadditions.oc.driver;
 
-import gregicadditions.GregicAdditions;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import li.cil.oc.api.driver.DriverBlock;
@@ -15,8 +14,7 @@ import java.util.Optional;
 abstract public class AbstractGregTechDriverBlock<T extends MetaTileEntity> implements DriverBlock {
     private final Class<T> entityFilter;
 
-    public AbstractGregTechDriverBlock(Class<T> entityFilter)
-    {
+    public AbstractGregTechDriverBlock(Class<T> entityFilter) {
         this.entityFilter = entityFilter;
     }
 
@@ -24,18 +22,17 @@ abstract public class AbstractGregTechDriverBlock<T extends MetaTileEntity> impl
      * Optionally returns the GregTech Meta Tile Entity (which differ from the minecraft tile entities)
      */
     @SuppressWarnings("unchecked")
-    protected Optional<T> getMetaTileEntity(World world, BlockPos blockPos)
-    {
+    protected Optional<T> getMetaTileEntity(World world, BlockPos blockPos) {
         final TileEntity tile = world.getTileEntity(blockPos);
 
         // Make sure the tile is a meta tile entity holder
-        if (tile == null || ! MetaTileEntityHolder.class.isAssignableFrom(tile.getClass())) {
+        if (tile == null || !MetaTileEntityHolder.class.isAssignableFrom(tile.getClass())) {
             return Optional.empty();
         }
 
         // Make sure the greg tech tile entity implements the desired interface
         final MetaTileEntity entity = ((MetaTileEntityHolder) tile).getMetaTileEntity();
-        if (entity == null || ! this.entityFilter.isAssignableFrom(entity.getClass())) {
+        if (entity == null || !this.entityFilter.isAssignableFrom(entity.getClass())) {
             return Optional.empty();
         }
 
@@ -50,10 +47,9 @@ abstract public class AbstractGregTechDriverBlock<T extends MetaTileEntity> impl
 
     @Override
     public ManagedEnvironment createEnvironment(World world, BlockPos blockPos, EnumFacing enumFacing)
-            throws RuntimeException
-    {
+            throws RuntimeException {
         final Optional<T> gtMetaTileEntity = getMetaTileEntity(world, blockPos);
-        if (! gtMetaTileEntity.isPresent()) {
+        if (!gtMetaTileEntity.isPresent()) {
             throw new RuntimeException("Tried to get a GregTech MetaTileEntity from a non-holder.");
         }
 
