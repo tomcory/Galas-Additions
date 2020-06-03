@@ -96,7 +96,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2854'
 
-
+    compile "li.cil.oc:OpenComputers:MC${mcVersion}-${ocVersion}:api"
     compile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.+"
     compile "mezz.jei:jei_1.12.2:+"
     compile "mcp.mobius.waila:Hwyla:1.8+:sources"
