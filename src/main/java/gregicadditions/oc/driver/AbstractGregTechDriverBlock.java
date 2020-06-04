@@ -8,21 +8,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.Optional;
 
-abstract public class AbstractGregTechDriverBlock<T extends MetaTileEntity> implements DriverBlock {
-    private final Class<T> entityFilter;
+abstract public class AbstractGregTechDriverBlock<T> implements DriverBlock {
+    private final Capability<T> capability;
 
-    public AbstractGregTechDriverBlock(Class<T> entityFilter) {
-        this.entityFilter = entityFilter;
+    public AbstractGregTechDriverBlock(Capability<T> capability) {
+        this.capability = capability;
     }
 
     /**
      * Optionally returns the GregTech Meta Tile Entity (which differ from the minecraft tile entities)
      */
-    @SuppressWarnings("unchecked")
-    protected Optional<T> getMetaTileEntity(World world, BlockPos blockPos) {
+    protected Optional<MetaTileEntity> getMetaTileEntity(World world, BlockPos blockPos, EnumFacing facing) {
         final TileEntity tile = world.getTileEntity(blockPos);
 
         // Make sure the tile is a meta tile entity holder
@@ -31,30 +31,39 @@ abstract public class AbstractGregTechDriverBlock<T extends MetaTileEntity> impl
         }
 
         // Make sure the greg tech tile entity implements the desired interface
-        final MetaTileEntity entity = ((MetaTileEntityHolder) tile).getMetaTileEntity();
-        if (entity == null || !this.entityFilter.isAssignableFrom(entity.getClass())) {
-            return Optional.empty();
-        }
+        return Optional.of(((MetaTileEntityHolder) tile).getMetaTileEntity());
+    }
 
-        // Unchecked cast
-        return Optional.of((T) entity);
+    /**
+     * Optionally returns the GregTech Capability
+     */
+    protected Optional<T> getMetaTileCapability(MetaTileEntity entity, EnumFacing facing) {
+        return Optional.of(entity.getCoverCapability(this.capability, facing));
     }
 
     @Override
-    public boolean worksWith(World world, BlockPos blockPos, EnumFacing enumFacing) {
-        return getMetaTileEntity(world, blockPos).isPresent();
+    public boolean worksWith(World world, BlockPos blockPos, EnumFacing facing) {
+        Optional<MetaTileEntity> entity = this.getMetaTileEntity(world, blockPos, facing);
+        return entity.isPresent() && this.getMetaTileCapability(entity.get(), facing).isPresent();
     }
 
     @Override
-    public ManagedEnvironment createEnvironment(World world, BlockPos blockPos, EnumFacing enumFacing)
+    public ManagedEnvironment createEnvironment(World world, BlockPos blockPos, EnumFacing facing)
             throws RuntimeException {
-        final Optional<T> gtMetaTileEntity = getMetaTileEntity(world, blockPos);
-        if (!gtMetaTileEntity.isPresent()) {
-            throw new RuntimeException("Tried to get a GregTech MetaTileEntity from a non-holder.");
+        // Ensure we can still retrieve the MetaTileEntity
+        final Optional<MetaTileEntity> metaTileEntity = this.getMetaTileEntity(world, blockPos, facing);
+        if (!metaTileEntity.isPresent()) {
+            throw new RuntimeException("Setting up driver environment failed due to missing GTCE MetaTileEntity");
         }
 
-        return createEnvironment(gtMetaTileEntity.get());
+        // Ensure the Capability is still preset
+        final Optional<T> capability = this.getMetaTileCapability(metaTileEntity.get(), facing);
+        if (!capability.isPresent()) {
+            throw new RuntimeException("Setting up driver environment failed due to missing capability");
+        }
+
+        return createEnvironment(capability.get(), metaTileEntity.get());
     }
 
-    abstract public ManagedEnvironment createEnvironment(T tile);
+    abstract public ManagedEnvironment createEnvironment(T tile, MetaTileEntity entity);
 }
