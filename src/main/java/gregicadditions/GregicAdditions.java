@@ -2,6 +2,7 @@ package gregicadditions;
 
 import java.util.function.Function;
 
+import gregicadditions.oc.OpenComputerIntegration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,11 +35,19 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod(modid = GregicAdditions.MODID, name = GregicAdditions.NAME, version = GregicAdditions.VERSION, dependencies = "required-after:gregtech@[1.8.6.437,);after:forestry;after:tconstruct")
+@Mod(
+	modid = GregicAdditions.MODID,
+	name = GregicAdditions.NAME,
+	version = GregicAdditions.VERSION,
+	dependencies = "required-after:gregtech@[1.8.6.437,);"
+		+ "after:forestry;"
+		+ "after:tconstruct;"
+		+ "after:opencomputers;"
+)
 public class GregicAdditions {
 	public static final String MODID = "gtadditions";
-	public static final String NAME = "Shadows of Greg";
-	public static final String VERSION = "@VERSION@";
+	public static final String NAME = "Galas Additions";
+	public static final String VERSION = "1.1.0";
 
 	@SidedProxy(modId = MODID, clientSide = "gregicadditions.bees.ClientProxy", serverSide = "gregicadditions.bees.CommonProxy")
 	public static CommonProxy proxy;
@@ -62,6 +71,8 @@ public class GregicAdditions {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		if (GAConfig.GTBees.EnableGTCEBees && Loader.isModLoaded("forestry")) GTBees.initBees();
+
+		OpenComputerIntegration.initDrivers();
 	}
 
 	@EventHandler
