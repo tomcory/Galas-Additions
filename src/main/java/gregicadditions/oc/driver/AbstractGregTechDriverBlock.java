@@ -38,7 +38,7 @@ abstract public class AbstractGregTechDriverBlock<T> implements DriverBlock {
      * Optionally returns the GregTech Capability
      */
     protected Optional<T> getMetaTileCapability(MetaTileEntity entity, EnumFacing facing) {
-        return Optional.of(entity.getCoverCapability(this.capability, facing));
+        return Optional.ofNullable(entity.getCoverCapability(this.capability, facing));
     }
 
     @Override
