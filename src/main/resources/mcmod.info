@@ -1,10 +1,10 @@
 [
 {
-  "modid": "gtadditions",
-  "name": "Galas Additions",
+  "modid": "${mod.id}",
+  "name": "${mod.name}",
   "description": "The big spook takes your lunch money.  Who reads these?",
-  "version": "1.1.0",
-  "mcversion": "1.12.2",
+  "version": "${mod.version.major}.${mod.version.minor}.${mod.version.patch}",
+  "mcversion": "${minecraft.version}",
   "url": "",
   "updateUrl": "",
   "authorList": ["Galadir", "Cyanide23", "Shadows_of_Fire", "TheEmosewaPixel","Bartz24"],

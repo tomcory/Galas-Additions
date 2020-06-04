@@ -47,7 +47,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class GregicAdditions {
 	public static final String MODID = "gtadditions";
 	public static final String NAME = "Galas Additions";
-	public static final String VERSION = "1.1.0";
+	public static final String VERSION = GregicAdditionsVersion.VERSION;
 
 	@SidedProxy(modId = MODID, clientSide = "gregicadditions.bees.ClientProxy", serverSide = "gregicadditions.bees.CommonProxy")
 	public static CommonProxy proxy;
