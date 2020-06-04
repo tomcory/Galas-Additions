@@ -25,7 +25,7 @@ apply plugin: 'maven-publish'
 def ocVersion = '1.7.+'
 def mcVersion = '1.12.2'
 
-version = "${mcVersion}-1.1.0"
+version = "${mcVersion}-1.1.1"
 group = 'gregicadditions' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Galas_Additions'
 
